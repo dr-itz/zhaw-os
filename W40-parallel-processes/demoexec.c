@@ -15,11 +15,13 @@ int main ()
 		execl("/bin/date", "date", NULL);
 
 		printf("This should not happen!\n");
+		exit(1);
 	}
 
 	printf("Parent waiting for child's dead\n");
 	waitpid(pid, &status, 0);
-	printf("Parent, PID: %d: Child with PID %d just died.\n", getpid(), pid);
+	printf("Parent, PID: %d: Child with PID %d just died with status %d.\n",
+		getpid(), pid, WEXITSTATUS(status));
 
 	exit(0);
 }
