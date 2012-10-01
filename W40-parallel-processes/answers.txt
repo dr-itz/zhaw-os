@@ -1,0 +1,54 @@
+E1.1
+====
+
+a) Die PID
+b) Pointer auf Status-int. Dieser enthält Exit-Code und Exit-Reason
+c) waitpid(-1, &status, 0);
+d) Mit Macro WIFEXITED: if (WIFEXITED(status)) ...
+e) Mit Macro WEXITSTATUS: int exitcode = WEXITSTATUS(status);
+
+
+E1.2
+====
+
+a) Für kurze Zeit, bis der Status mit wait()/waitpid() gelesen wird
+b) Jup. Ein Prozess is "defunct" bis ein wait*() ausgeführt wird
+c)
+  Vodergrund: nein
+  Hintergrund: nein, sofern Controlling Terminal vorhanden
+d) Ja, keine Ausgabe auf Console
+
+
+E1.3
+====
+
+a)
+  execl: Args als vararg, NULL-terminiert
+  execv: Args als Array, NULL-terminiert
+  execle: execl + Environment als NULL-terminiertes Array
+  exec*p: Das Verhalten der Shell wird nachempfunden betreffend PATH
+b) Alle offenen File-Handles
+ All process attributes are preserved during an execve(), except the following:
+       *      The dispositions of any signals that are being caught are reset to the default (signal(7)).
+       *      Any alternate signal stack is not preserved (sigaltstack(2)).
+       *      Memory mappings are not preserved (mmap(2)).
+       *      Attached System V shared memory segments are detached (shmat(2)).
+       *      POSIX shared memory regions are unmapped (shm_open(3)).
+       *      Open POSIX message queue descriptors are closed (mq_overview(7)).
+       *      Any open POSIX named semaphores are closed (sem_overview(7)).
+       *      POSIX timers are not preserved (timer_create(2)).
+       *      Any open directory streams are closed (opendir(3)).
+       *      Memory locks are not preserved (mlock(2), mlockall(2)).
+       *      Exit handlers are not preserved (atexit(3), on_exit(3)).
+       *      The floating-point environment is reset to the default (see fenv(3)).
+
+E1.4
+====
+
+a) Wurde ausgeführt
+b) Sofern exec*() nicht ausgeführt werden konnte, z.B. wenn das Binary nicht gefunden wird
+c) Weil die Ausführung nach dem if (pid == 0) weiterläuft...
+d) Nein
+e) Nein
+f) Siehe Code. Unter anderem wurde das hässliche Busy-Waiting ersetzt.
+
