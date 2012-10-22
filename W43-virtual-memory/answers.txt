@@ -1,0 +1,19 @@
+E4.1
+====
+
+a) 0
+b) Right shift: x / (2^n) wird zu x >> n
+c) Block 0x00034af6
+d) RelAdr = Adresse MOD Blockgrösse
+e) Lower n Bits maskieren: Offset = Adresse & ~(~0 << n)
+f) Offset = 0x00000784
+
+E4.2
+====
+
+a) 2KB = 2^11 => 2^21 Pages = 2'097'152 Pages
+b) 24bit Addressraum, 2KB Pages => 2^24/2^11 = 2^13 = 8192 Page frames
+c) siehe a
+d) 13
+e) Maskierung: Offset = Address & 0x7FF
+
